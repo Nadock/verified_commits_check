@@ -1,0 +1,24 @@
+name: Verified commits alert
+
+
+author: Nadock
+
+
+description: Check pushed commits for unverified commits and send an alert to a message backend.
+
+
+branding:
+  icon: check
+  color: green
+
+
+inputs:
+  github_token:
+    default: ${{ github.token }}
+
+
+runs:
+  using: docker
+  image: Dockerfile
+  env:
+    GITHUB_TOKEN: ${{ inputs.github_token }}
