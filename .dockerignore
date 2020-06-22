@@ -1,0 +1,7 @@
+.mypy_cache/
+.vscode/
+events/
+.dockerignore
+.pylintrc
+action.yml
+docker-compose.yml
