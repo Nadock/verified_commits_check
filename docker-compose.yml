@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  verified_commits_alert:
+    build:
+      context: .
+      args:
+        PIPENV_FLAGS: --dev
+    environment:
+      - LOG_LEVEL
+      - GITHUB_REPOSITORY
+      - GITHUB_EVENT_PATH
+      - GITHUB_TOKEN
+      - MESSAGE_BACKEND
+    volumes:
+      - ./events:/opt/app/events
