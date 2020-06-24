@@ -3,3 +3,7 @@
 # bad-continuation handled by https://github.com/psf/black
 disable=bad-continuation,
         logging-fstring-interpolation
+
+[FORMAT]
+
+max-line-length=88
