@@ -12,7 +12,7 @@ from . import action, messenger
     "path, content",
     [
         (
-            "../events/unit_test.json",
+            "./events/unit_test.json",
             {"commits": ["hash-0", "hash-1", "hash-2", "hash-3"]},
         )
     ],
@@ -26,13 +26,13 @@ def test_load_event(path, content):
 def test_load_event_not_json():
     """Test loading not JSON from the on disk location fails correctly."""
     with pytest.raises(json.JSONDecodeError):
-        action.load_event("../events/unit_test_not_json.txt")
+        action.load_event("./events/unit_test_not_json.txt")
 
 
 def test_load_event_not_file():
     """Test loading from a non-file fails correctly."""
     with pytest.raises(OSError):
-        action.load_event("../events/unit_test_not_a_file")
+        action.load_event("./events/unit_test_not_a_file")
 
 
 @pytest.mark.parametrize("event, commits", [({"commits": ["abc123"]}, ["abc123"])])
@@ -193,7 +193,7 @@ def test_send_messages(messenger):  # pylint: disable=redefined-outer-name
 def test_main(github):
     """Test the action end-to-end to see everything working together correctly."""
     os.environ["GITHUB_REPOSITORY"] = "github/repo-name"
-    os.environ["GITHUB_EVENT_PATH"] = "../events/unit_test.json"
+    os.environ["GITHUB_EVENT_PATH"] = "./events/unit_test.json"
     os.environ["GITHUB_TOKEN"] = "github-test-token"
 
     def mock_get_commit(repo, sha):

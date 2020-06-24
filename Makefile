@@ -1,16 +1,19 @@
 .PHONY: black black-check pytest pylint mypy
 
+setup:
+	pipenv install --dev
+
 black:
-	black ./src
+	pipenv run black ./src
 
 black-check:
-	black --check ./src
+	pipenv run black --check ./src
 
 pytest:
-	cd ./src && pytest
+	pipenv run pytest
 
 pylint:
-	pylint src
+	pipenv run pylint src
 
 mypy:
-	mypy ./src
+	pipenv run mypy ./src
