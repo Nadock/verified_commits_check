@@ -2,7 +2,7 @@
 import logging
 import os
 from urllib import parse
-from typing import Dict
+from typing import Dict, Optional
 
 import requests
 
@@ -10,7 +10,7 @@ LOGGER = logging.getLogger(__name__)
 LOGGER.setLevel(os.environ.get("LOG_LEVEL", "INFO"))
 
 
-class GithubApiClient:
+class GitHubApiClient:
     """API Client for interacting with GitHub's v3 REST API."""
 
     base_url = "https://api.github.com"
@@ -20,23 +20,7 @@ class GithubApiClient:
         if not self.token:
             raise ValueError("GitHub token value must not be None or empty")
 
-    def _unwrap_response(self, response: requests.Response):
-        try:
-            body = response.json()
-        except Exception as ex:
-            LOGGER.error(f"Error reading JSON from response body: {ex}")
-            raise ex
-
-        try:
-            response.raise_for_status()
-        except Exception as ex:
-            LOGGER.error(f"GitHub API error: {ex}")
-            LOGGER.debug(f"GitHub API response body: {body}")
-            raise ex
-
-        return body
-
-    def headers(self, extra: Dict[str, str]) -> Dict[str, str]:
+    def headers(self, extra: Optional[Dict[str, str]]) -> Dict[str, str]:
         """
         Generate a dict of headers to include in each request.
 
@@ -52,14 +36,47 @@ class GithubApiClient:
 
         return {**headers, **extra}
 
-    def get(self, endpoint, params=None, headers=None) -> dict:
+    def get(
+        self,
+        endpoint: str,
+        *,
+        params: Optional[Dict[str, str]] = None,
+        headers: Optional[Dict[str, str]] = None,
+    ) -> Optional[dict]:
         """Perform a HTTP GET request and unwrap the response."""
         headers = self.headers(headers)
         url = parse.urljoin(self.base_url, endpoint)
 
         resp = requests.get(url, params=params, headers=headers)
-        return self._unwrap_response(resp)
+        return unwrap_requests_response(resp)
 
-    def get_commit(self, repo: str, sha: str) -> dict:
+    def get_commit(self, *, repo: str, sha: str) -> dict:
         """Get the details of a specified git commit."""
-        return self.get(f"/repos/{repo}/commits/{sha}")
+        endpoint = f"/repos/{repo}/commits/{sha}"
+        resp = self.get(endpoint)
+        if not resp:
+            raise ValueError(f"Invalid empty response from GitHub API {endpoint}")
+        return resp
+
+
+def unwrap_requests_response(response: requests.Response) -> Optional[dict]:
+    """
+    Get JSON body from a `requests.Response` and check the response status code is in
+    [200, 300).
+    """
+    body = None
+    if response.content:
+        try:
+            body = response.json()
+        except Exception as ex:
+            LOGGER.error(f"Error reading JSON from response body: {ex}")
+            raise ex
+
+    try:
+        response.raise_for_status()
+    except Exception as ex:
+        LOGGER.error(f"GitHub API error: {ex}")
+        LOGGER.debug(f"GitHub API response body: {body}")
+        raise ex
+
+    return body

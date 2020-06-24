@@ -78,7 +78,7 @@ def get_unverified_commits(
 
     `commit_hashes` should be a list of git hashes to check the verification status of.
     """
-    github_client = github.GithubApiClient(token)
+    github_client = github.GitHubApiClient(token)
     commits = []
 
     for sha in commit_hashes:

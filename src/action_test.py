@@ -92,7 +92,7 @@ def test_get_unverified_commits(github):
         {"commit": {"id": "hash-4", "verification": {"verified": False}}},
     ]
 
-    github.GithubApiClient.return_value.get_commit.side_effect = [
+    github.GitHubApiClient.return_value.get_commit.side_effect = [
         {"commit": {"id": "hash-1", "verification": {"verified": True}}},
         {"commit": {"id": "hash-2", "verification": {"verified": False}}},
         {"commit": {"id": "hash-3", "verification": {"verified": True}}},
@@ -101,7 +101,7 @@ def test_get_unverified_commits(github):
 
     result = action.get_unverified_commits(token=token, repo=repo, commit_hashes=hashes)
     assert result == expected
-    github.GithubApiClient.assert_called_once_with(token)
+    github.GitHubApiClient.assert_called_once_with(token)
 
 
 def test_group_by_author():
@@ -210,8 +210,8 @@ def test_main(github):
             "url": f"https://github.com/{repo}/commit/{sha}",
         }
 
-    github.GithubApiClient.return_value.get_commit = mock_get_commit
+    github.GitHubApiClient.return_value.get_commit = mock_get_commit
 
     commit_count = action.main()
     assert commit_count == 1
-    github.GithubApiClient.assert_called_once_with("github-test-token")
+    github.GitHubApiClient.assert_called_once_with("github-test-token")
