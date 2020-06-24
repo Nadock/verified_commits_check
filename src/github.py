@@ -24,7 +24,8 @@ class GitHubApiClient:
         """
         Generate a dict of headers to include in each request.
 
-        `extra` headers will be combined with the default headers, overwriting on duplicate keys.
+        `extra` headers will be combined with the default headers, overwriting on
+        duplicate keys.
         """
         if not extra:
             extra = {}
