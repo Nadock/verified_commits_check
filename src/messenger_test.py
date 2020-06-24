@@ -2,8 +2,8 @@
 from . import messenger
 
 
-def test_console_fmt():
-    """Test the console formatter formats output correclty."""
+def test_send_to_console(capsys):
+    """Test send_to_console formats output correclty."""
     # pylint: disable=protected-access
     author = "test-user"
     repo = "github/repo-name"
@@ -14,5 +14,7 @@ def test_console_fmt():
         f"to {repo}:\n\n\t* {commits[0]['url']}\n\t* {commits[1]['url']}\n"
     )
 
-    result = messenger._console_fmt(author=author, repo=repo, commits=commits)
-    assert result == expected
+    messenger.send_to_console(author=author, repo=repo, commits=commits)
+
+    captured = capsys.readouterr()
+    assert captured.out == expected
