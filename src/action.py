@@ -1,11 +1,10 @@
 import json
-import os
-from typing import Dict, List
 import logging
+import os
+import sys
+from typing import Dict, List
 
-from . import github
-from . import messenger
-
+from . import github, messenger
 
 LOGGER = logging.getLogger("verified_commits_alert")
 LOGGER.setLevel(os.environ.get("LOG_LEVEL", "INFO"))
@@ -32,6 +31,8 @@ def main():
     grouped_commits = group_by_author(commits)
 
     send_messages(github_repository, grouped_commits)
+
+    return len(commits)
 
 
 def send_messages(repo: str, grouped_commits: Dict[str, dict]):
@@ -105,4 +106,4 @@ def load_event(path: str) -> dict:
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
