@@ -1,9 +1,10 @@
 .mypy_cache/
+.pytest_cache/
 .vscode/
 events/
 .dockerignore
-src/.pytest_cache
 .dockerignore
 .gitignore
 .pylintrc
 action.yml
+src/*_test.py

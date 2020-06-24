@@ -17,3 +17,6 @@ pylint:
 
 mypy:
 	pipenv run mypy src
+
+docker-build:
+	docker build -t verified_commits_alert .
