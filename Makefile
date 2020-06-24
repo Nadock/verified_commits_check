@@ -16,4 +16,4 @@ pylint:
 	pipenv run pylint src
 
 mypy:
-	pipenv run mypy ./src
+	pipenv run mypy src

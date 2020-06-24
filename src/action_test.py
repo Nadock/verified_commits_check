@@ -3,7 +3,7 @@ import os
 import json
 from unittest import mock
 
-import pytest
+import pytest # type: ignore
 
 from . import action, messenger
 
