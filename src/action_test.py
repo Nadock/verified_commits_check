@@ -67,7 +67,7 @@ def test_is_commit_verified(commit, verified):
 
 
 @pytest.mark.parametrize(
-    "commit", [({}), ({"commit": {}}), ({"commit": {"verification": {}}}),],
+    "commit", [({}), ({"commit": {}}), ({"commit": {"verification": {}}})]
 )
 def test_is_commit_verified_no_verified_key(commit):
     """
