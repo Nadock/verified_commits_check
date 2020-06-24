@@ -21,6 +21,11 @@ def send_to_console(*, author: str, repo: str, commits: List[dict]):
 
     `commits` is the list of commits that were unverified.
     """
+    print(_console_fmt(author=author, repo=repo, commits=commits))
+
+
+def _console_fmt(*, author: str, repo: str, commits: List[dict]):
+    """Format the output for `send_to_console`."""
     msg = (
         f"GitHub User {author} pushed the following {len(commits)} unverified "
         f"commits to {repo}:\n\n"
@@ -30,4 +35,4 @@ def send_to_console(*, author: str, repo: str, commits: List[dict]):
         url = commit["url"]
         msg += f"\t* {url}\n"
 
-    print(msg)
+    return msg
