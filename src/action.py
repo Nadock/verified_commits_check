@@ -1,3 +1,9 @@
+"""
+Verified Commtis Alert GitHub Action.
+
+When run as a GitHub Action on every push to a repository, it can detect and alert
+whenever a user pushes unverified commits to GitHub.
+"""
 import json
 import logging
 import os
