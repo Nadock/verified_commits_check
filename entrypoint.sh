@@ -6,12 +6,14 @@
 set -euxo pipefail
 
 echo "--- verified commits alert ---"
+
 env
-echo ""
 pwd
 cd /opt/action
 echo ""
 ls -al
+echo ""
+cat $GITHUB_EVENT_PATH
 echo ""
 python3 -m src.action
 echo "--- verified commits alert ---"
