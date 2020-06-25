@@ -117,4 +117,20 @@ def load_event(path: str) -> dict:
 if __name__ == "__main__":
     print(f"os.environ.get('LOG_LEVEL')={os.environ.get('LOG_LEVEL')}")
     print(f"LOGGER.getEffectiveLevel()={LOGGER.getEffectiveLevel()}")
+
+    ch = logging.StreamHandler()
+    ch.setLevel(os.environ.get("LOG_LEVEL", "INFO").upper())
+
+    # create formatter
+    formatter = logging.Formatter(
+        "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    )
+
+    # add formatter to ch
+    ch.setFormatter(formatter)
+
+    # add ch to logger
+    logger = logging.getLogger()
+    logger.addHandler(ch)
+
     sys.exit(main())
