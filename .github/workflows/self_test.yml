@@ -8,5 +8,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: nadock/verified_commits_alert@master
-        environment:
+        env:
           LOG_LEVEL: DEBUG
