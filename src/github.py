@@ -49,13 +49,13 @@ class GitHubApiClient:
         headers = self.headers(headers)
         url = parse.urljoin(self.base_url, endpoint)
 
-        LOGGER.info(f"GET {url}")
+        LOGGER.debug(f"GET {url}")
         resp = requests.get(url, params=params, headers=headers)
         return unwrap_requests_response(resp)
 
     def get_commit(self, *, repo: str, sha: str) -> dict:
         """Get the details of a specified git commit."""
-        LOGGER.info(f"get_commit({repo}, {sha})")
+        LOGGER.debug(f"get_commit({repo}, {sha})")
         endpoint = f"/repos/{repo}/commits/{sha}"
         resp = self.get(endpoint)
         if not resp:
