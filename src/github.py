@@ -1,6 +1,7 @@
 """API interactions with GitHub."""
 import logging
 import os
+import json
 from urllib import parse
 from typing import Dict, Optional
 
@@ -77,7 +78,7 @@ def unwrap_requests_response(response: requests.Response) -> Optional[dict]:
         response.raise_for_status()
     except Exception as ex:
         LOGGER.error(f"GitHub API error: {ex}")
-        LOGGER.debug(f"GitHub API response body: {body}")
+        LOGGER.debug(f"GitHub API response body: {json.dumps(body, indent=2)}")
         raise ex
 
     return body
