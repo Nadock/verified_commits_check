@@ -1,18 +1,16 @@
 FROM python:3.8-alpine
 
-WORKDIR /opt/app
+RUN mkdir /opt/action && pip3 install pipenv
 
-RUN pip3 install pipenv
-
-COPY Pipfile .
-COPY Pipfile.lock .
+COPY Pipfile /opt/action
+COPY Pipfile.lock /opt/action
 
 ARG PIPENV_FLAGS
-RUN pipenv install --deploy --system ${PIPENV_FLAGS}
+RUN cd /opt/action && pipenv install --deploy --system ${PIPENV_FLAGS}
 
-COPY ./src ./src
-COPY entrypoint.sh .
+COPY ./src /opt/action/src
+COPY entrypoint.sh /opt/action
 
-ENV PYTHON_PATH=/opt/app
+ENV PYTHON_PATH=/opt/action
 
-ENTRYPOINT [ "./entrypoint.sh" ]
+ENTRYPOINT [ "/opt/action/entrypoint.sh" ]
