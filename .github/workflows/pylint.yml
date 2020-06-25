@@ -1,0 +1,23 @@
+name: pylint
+
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+
+jobs:
+  pylint:
+    name: make pylint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - run: |
+          pip3 install pipenv
+          pipenv install --dev --system --deploy
+          make pylint
