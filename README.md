@@ -11,12 +11,28 @@
 
 ## Badges
 
+<!-- HTML here because we want centre alignment -->
 <p align="center">
-    [![pylint](https://github.com/Nadock/verified_commits_alert/workflows/pylint/badge.svg)](https://github.com/nadock/verified_commits_alert/actions/?query=workflow%3Apylint)
-    [![pytest](https://github.com/Nadock/verified_commits_alert/workflows/pytest/badge.svg)](https://github.com/nadock/verified_commits_alert/actions/?query=workflow%3Apytest)
-    [![mypy](https://github.com/Nadock/verified_commits_alert/workflows/mypy/badge.svg)](https://github.com/nadock/verified_commits_alert/actions/?query=workflow%3Amypy)
-    [![black](https://github.com/Nadock/verified_commits_alert/workflows/black/badge.svg)](https://github.com/nadock/verified_commits_alert/actions/?query=workflow%3Ablack)
-    [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+    <!-- pylint -->
+    <a href="https://github.com/nadock/verified_commits_alert/actions/?query=workflow%3Apylint">
+        <img alt="black" src="https://github.com/Nadock/verified_commits_alert/workflows/pylint/badge.svg">
+    </a>
+    <!-- pytest -->
+    <a href="https://github.com/nadock/verified_commits_alert/actions/?query=workflow%3Apytest">
+        <img alt="black" src="https://github.com/Nadock/verified_commits_alert/workflows/pytest/badge.svg">
+    </a>
+    <!-- mypy -->
+    <a href="https://github.com/nadock/verified_commits_alert/actions/?query=workflow%3Amypy">
+        <img alt="black" src="https://github.com/Nadock/verified_commits_alert/workflows/mypy/badge.svg">
+    </a>
+    <!-- black -->
+    <a href="https://github.com/nadock/verified_commits_alert/actions/?query=workflow%3Ablack">
+        <img alt="black" src="https://github.com/Nadock/verified_commits_alert/workflows/black/badge.svg">
+    </a>
+    <!-- codestyle:black -->
+    <a href="https://github.com/psf/black">
+        <img alt="black" src="https://img.shields.io/badge/code%20style-black-000000.svg">
+    </a>
 </p>
 
 ## Example workflow
