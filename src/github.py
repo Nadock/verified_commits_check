@@ -9,6 +9,7 @@ import requests
 
 LOGGER = logging.getLogger(__name__)
 LOGGER.setLevel(os.environ.get("LOG_LEVEL", "INFO"))
+LOGGER.
 
 
 class GitHubApiClient:
@@ -79,6 +80,13 @@ def unwrap_requests_response(response: requests.Response) -> Optional[dict]:
     except Exception as ex:
         LOGGER.error(f"GitHub API error: {ex}")
         LOGGER.debug(f"GitHub API response body: {json.dumps(body, indent=2)}")
+
+        print(f"os.environ.get('LOG_LEVEL')={os.environ.get('LOG_LEVEL')}")
+        print(f"LOGGER.getEffectiveLevel()={LOGGER.getEffectiveLevel()}")
+        print(LOGGER.isEnabledFor(LOGGER.getEffectiveLevel()))
+        print(LOGGER.isEnabledFor(10))
+        print("!-->", json.dumps(body, indent=2))
+
         raise ex
 
     return body
