@@ -29,11 +29,12 @@ def main():
     event = load_event(github_event_path)
     LOGGER.info(f"Loaded event from {github_event_path}")
 
-    commits = get_commits_from_event(event)
-    urls = get_commit_urls(commits)
-    LOGGER.info(f"Event contained these commit urls: {urls}")
+    commit_hashes = get_commits_from_event(event)
+    LOGGER.info(f"Event contained these hashes: {commit_hashes}")
 
-    commits = get_unverified_commits(token=github_token, urls=urls)
+    commits = get_unverified_commits(
+        token=github_token, repo=github_repository, commit_hashes=commit_hashes
+    )
     LOGGER.info(f"The following commits are unverified: {commits}")
 
     grouped_commits = group_by_author(commits)
@@ -73,7 +74,9 @@ def group_by_author(commits: List[dict]) -> Dict[str, List[dict]]:
     return grouped
 
 
-def get_unverified_commits(*, token: str, urls) -> List[dict]:
+def get_unverified_commits(
+    *, token: str, repo: str, commit_hashes: List[str]
+) -> List[dict]:
     """
     Get a subset commit_hashes that refer to unverified commits.
 
@@ -87,8 +90,8 @@ def get_unverified_commits(*, token: str, urls) -> List[dict]:
     github_client = github.GitHubApiClient(token)
     commits = []
 
-    for url in urls:
-        commit = github_client.get(url)
+    for sha in commit_hashes:
+        commit = github_client.get_commit(repo=repo, sha=sha)
         if not is_commit_verified(commit):
             commits.append(commit)
 
@@ -100,13 +103,9 @@ def is_commit_verified(commit: dict) -> bool:
     return commit["commit"]["verification"]["verified"]
 
 
-def get_commit_urls(commits):
-    return [commit["url"] for commit in commits]
-
-
 def get_commits_from_event(event: dict) -> List[str]:
     """Get a list of commit hashes from a GitHub push event object."""
-    return event["commits"]
+    return [commit["id"] for commit in event["commits"]]
 
 
 def load_event(path: str) -> dict:
@@ -116,6 +115,9 @@ def load_event(path: str) -> dict:
 
 
 if __name__ == "__main__":
+    print(f"os.environ.get('LOG_LEVEL')={os.environ.get('LOG_LEVEL')}")
+    print(f"LOGGER.getEffectiveLevel()={LOGGER.getEffectiveLevel()}")
+
     ch = logging.StreamHandler()
     ch.setLevel(os.environ.get("LOG_LEVEL", "INFO").upper())
 
