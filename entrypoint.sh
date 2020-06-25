@@ -5,10 +5,5 @@
 # o pipefail: Exit status of pipe is non-zero if any step in pipe fails
 set -euxo pipefail
 
-echo "--- verified commits alert ---"
-env | sort
-echo ""
-
 cd /opt/action
 python3 -m src.action
-echo "--- verified commits alert ---"
