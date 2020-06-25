@@ -112,4 +112,6 @@ def load_event(path: str) -> dict:
 
 
 if __name__ == "__main__":
+    print(f"os.environ['LOG_LEVEL']={os.environ['LOG_LEVEL']}")
+    print(f"LOGGER.getEffectiveLevel()={LOGGER.getEffectiveLevel()g}")
     sys.exit(main())
