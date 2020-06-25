@@ -74,6 +74,7 @@ def unwrap_requests_response(response: requests.Response) -> Optional[dict]:
             body = response.json()
         except Exception as ex:
             LOGGER.error(f"Error reading JSON from response body: {ex}")
+            LOGGER.debug(f"Raw GitHub API response: {response.text}")
             raise ex
 
     try:
@@ -81,14 +82,6 @@ def unwrap_requests_response(response: requests.Response) -> Optional[dict]:
     except Exception as ex:
         LOGGER.error(f"GitHub API error: {ex}")
         LOGGER.debug(f"GitHub API response body: {json.dumps(body, indent=2)}")
-
-        print(f"os.environ.get('LOG_LEVEL')={os.environ.get('LOG_LEVEL')}")
-        print(f"LOGGER.getEffectiveLevel()={LOGGER.getEffectiveLevel()}")
-        print(LOGGER.isEnabledFor(LOGGER.getEffectiveLevel()))
-        print(LOGGER.isEnabledFor(10))
-        LOGGER.debug("this is debug logged :yeet:")
-        print("!-->", json.dumps(body, indent=2))
-
         raise ex
 
     return body

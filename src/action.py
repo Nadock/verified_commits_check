@@ -116,9 +116,6 @@ def load_event(path: str) -> dict:
 
 
 if __name__ == "__main__":
-    print(f"os.environ.get('LOG_LEVEL')={os.environ.get('LOG_LEVEL')}")
-    print(f"LOGGER.getEffectiveLevel()={LOGGER.getEffectiveLevel()}")
-
     ch = logging.StreamHandler()
     ch.setLevel(os.environ.get("LOG_LEVEL", "INFO").upper())
 
