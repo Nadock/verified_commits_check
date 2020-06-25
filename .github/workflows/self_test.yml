@@ -1,0 +1,10 @@
+name: Test this action
+
+on: push
+
+jobs:
+  unverified_commit_check:
+    name: Check for unverified commits
+    runs-on: ubuntu-latest
+    steps:
+      - uses: nadock/verified_commits_alert@master
