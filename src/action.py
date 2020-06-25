@@ -29,12 +29,11 @@ def main():
     event = load_event(github_event_path)
     LOGGER.info(f"Loaded event from {github_event_path}")
 
-    commit_hashes = get_commits_from_event(event)
-    LOGGER.info(f"Event contained these hashes: {commit_hashes}")
+    commits = get_commits_from_event(event)
+    urls = get_commit_urls(commits)
+    LOGGER.info(f"Event contained these commit urls: {urls}")
 
-    commits = get_unverified_commits(
-        token=github_token, repo=github_repository, commit_hashes=commit_hashes
-    )
+    commits = get_unverified_commits(token=github_token, urls=urls)
     LOGGER.info(f"The following commits are unverified: {commits}")
 
     grouped_commits = group_by_author(commits)
@@ -74,9 +73,7 @@ def group_by_author(commits: List[dict]) -> Dict[str, List[dict]]:
     return grouped
 
 
-def get_unverified_commits(
-    *, token: str, repo: str, commit_hashes: List[str]
-) -> List[dict]:
+def get_unverified_commits(*, token: str, urls) -> List[dict]:
     """
     Get a subset commit_hashes that refer to unverified commits.
 
@@ -90,8 +87,8 @@ def get_unverified_commits(
     github_client = github.GitHubApiClient(token)
     commits = []
 
-    for sha in commit_hashes:
-        commit = github_client.get_commit(repo=repo, sha=sha)
+    for url in urls:
+        commit = github_client.get(url)
         if not is_commit_verified(commit):
             commits.append(commit)
 
@@ -101,6 +98,10 @@ def get_unverified_commits(
 def is_commit_verified(commit: dict) -> bool:
     """`True` if a Github commit is verified, `False` otherwise."""
     return commit["commit"]["verification"]["verified"]
+
+
+def get_commit_urls(commits):
+    return [commit["url"] for commit in commits]
 
 
 def get_commits_from_event(event: dict) -> List[str]:
