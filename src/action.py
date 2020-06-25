@@ -27,12 +27,15 @@ def main():
         raise ex
 
     event = load_event(github_event_path)
+    LOGGER.info(f"Loaded event from {github_event_path}")
 
     commit_hashes = get_commits_from_event(event)
+    LOGGER.info(f"Event contained these hashes: {commit_hashes}")
 
     commits = get_unverified_commits(
         token=github_token, repo=github_repository, commit_hashes=commit_hashes
     )
+    LOGGER.info(f"The following commits are unverified: {commits}")
 
     grouped_commits = group_by_author(commits)
 
