@@ -9,7 +9,6 @@ import requests
 
 LOGGER = logging.getLogger(__name__)
 LOGGER.setLevel(os.environ.get("LOG_LEVEL", "INFO"))
-LOGGER.
 
 
 class GitHubApiClient:
