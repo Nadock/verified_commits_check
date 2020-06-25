@@ -1,0 +1,62 @@
+name: Test this action
+
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+
+jobs:
+  black:
+    name: black --check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - run: |
+          pip3 install pipenv
+          pipenv install --dev --system --deploy
+          make black-check
+
+  pylint:
+    name: pylint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - run: |
+          pip3 install pipenv
+          pipenv install --dev --system --deploy
+          make pylint
+
+  pytest:
+    name: pytest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - run: |
+          pip3 install pipenv
+          pipenv install --dev --system --deploy
+          make pytest
+
+  mypy:
+    name: mypy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - run: |
+          pip3 install pipenv
+          pipenv install --dev --system --deploy
+          make mypy

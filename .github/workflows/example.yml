@@ -1,6 +1,8 @@
-name: Test this action
+name: An example workflow
+
 
 on: push
+
 
 jobs:
   unverified_commit_check:
@@ -8,5 +10,3 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: nadock/verified_commits_alert@master
-        env:
-          LOG_LEVEL: DEBUG
