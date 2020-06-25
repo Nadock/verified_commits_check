@@ -27,17 +27,18 @@ def main():
         raise ex
 
     event = load_event(github_event_path)
-    LOGGER.info(f"Loaded event from {github_event_path}")
+    LOGGER.debug(f"Loaded event from {github_event_path}")
 
     commit_hashes = get_commits_from_event(event)
-    LOGGER.info(f"Event contained these hashes: {commit_hashes}")
+    LOGGER.debug(f"Event contained these hashes: {commit_hashes}")
 
     commits = get_unverified_commits(
         token=github_token, repo=github_repository, commit_hashes=commit_hashes
     )
-    LOGGER.info(f"The following commits are unverified: {commits}")
+    LOGGER.debug(f"The following commits are unverified: {commits}")
 
     grouped_commits = group_by_author(commits)
+    LOGGER.debug(f"Commits grouped by their author: {grouped_commits}")
 
     send_messages(github_repository, grouped_commits)
 
@@ -46,8 +47,10 @@ def main():
 
 def send_messages(repo: str, grouped_commits: Dict[str, dict]):
     """Send messages for the unverified commits."""
+    backend = select_backend()
+    LOGGER.debug(f"Selected messenger backed: {backend}")
+
     for author, commits in grouped_commits.items():
-        backend = select_backend()
         backend(author=author, repo=repo, commits=commits)
 
 
@@ -115,22 +118,14 @@ def load_event(path: str) -> dict:
 
 
 if __name__ == "__main__":
-    print(f"os.environ.get('LOG_LEVEL')={os.environ.get('LOG_LEVEL')}")
-    print(f"LOGGER.getEffectiveLevel()={LOGGER.getEffectiveLevel()}")
-
-    ch = logging.StreamHandler()
-    ch.setLevel(os.environ.get("LOG_LEVEL", "INFO").upper())
-
-    # create formatter
-    formatter = logging.Formatter(
-        "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    # Configure root logger formatting
+    logging_handler = logging.StreamHandler()
+    logging_handler.setLevel(os.environ.get("LOG_LEVEL", "INFO").upper())
+    logging_handler.setFormatter(
+        logging.Formatter("[%(levelname)s %(name)s %(lineno)d] %(message)s")
     )
 
-    # add formatter to ch
-    ch.setFormatter(formatter)
-
-    # add ch to logger
     logger = logging.getLogger()
-    logger.addHandler(ch)
+    logger.addHandler(logging_handler)
 
     sys.exit(main())

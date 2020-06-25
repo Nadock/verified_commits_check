@@ -3,24 +3,9 @@ import os
 import json
 from unittest import mock
 
-import pytest # type: ignore
+import pytest  # type: ignore
 
 from . import action, messenger
-
-
-@pytest.mark.parametrize(
-    "path, content",
-    [
-        (
-            "./events/unit_test.json",
-            {"commits": ["hash-0", "hash-1", "hash-2", "hash-3"]},
-        )
-    ],
-)
-def test_load_event(path, content):
-    """Test loading event JSON from the on disk location."""
-    result = action.load_event(path)
-    assert result == content
 
 
 def test_load_event_not_json():
@@ -35,7 +20,9 @@ def test_load_event_not_file():
         action.load_event("./events/unit_test_not_a_file")
 
 
-@pytest.mark.parametrize("event, commits", [({"commits": ["abc123"]}, ["abc123"])])
+@pytest.mark.parametrize(
+    "event, commits", [({"commits": [{"id": "abc123"}]}, ["abc123"])]
+)
 def test_get_commits_from_event(event, commits):
     """
     Test the get_commits_from_event method pulls commits from event objects correctly.

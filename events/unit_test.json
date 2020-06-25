@@ -1,8 +1,16 @@
 {
     "commits": [
-        "hash-0",
-        "hash-1",
-        "hash-2",
-        "hash-3"
+        {
+            "id": "hash-0"
+        },
+        {
+            "id": "hash-1"
+        },
+        {
+            "id": "hash-2"
+        },
+        {
+            "id": "hash-3"
+        }
     ]
 }
