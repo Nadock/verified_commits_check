@@ -34,7 +34,9 @@ Copy the text below into a file in your repository called `.github/workflows/ver
 # .github/workflows/verified_commits_check.yml
 name: Run verified commits check
 
+
 on: push
+
 
 jobs:
   verified_commit_check:
