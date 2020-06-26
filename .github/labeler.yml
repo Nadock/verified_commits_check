@@ -4,7 +4,7 @@ tests:
 messenger:
   - src/messenger*.py
 
-docs:
+documentation:
   - "*.md"
   - "**/*.md"
   - LICENSE
@@ -18,7 +18,7 @@ action:
   - action.yml
   - entrypoint.sh
 
-misc:
+g:
   - events/*
   - img/*
   - .*ignore
