@@ -1,0 +1,7 @@
+# Set the Pull Request creator as the assignee
+addAssignees: author
+
+# Assign the Connect-Capture team as the reviewers
+addReviewers: true
+reviewers:
+ - "@Nadock"
