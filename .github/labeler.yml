@@ -1,0 +1,26 @@
+tests:
+  - src/*_test.py
+
+messenger:
+  - src/messenger*.py
+
+docs:
+  - "*.md"
+  - "**/*.md"
+  - LICENSE
+
+dependencies:
+  - Pipfile*
+
+action:
+  - src/*.py
+  - Dockerfile
+  - action.yml
+  - entrypoint.sh
+
+misc:
+  - events/*
+  - img/*
+  - .*ignore
+  - .pylintrc
+  - Makefile
