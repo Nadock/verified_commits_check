@@ -18,7 +18,7 @@ action:
   - action.yml
   - entrypoint.sh
 
-g:
+misc:
   - events/*
   - img/*
   - .*ignore
