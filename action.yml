@@ -1,10 +1,10 @@
-name: Verified commits alert
+name: Verified commits check
 
 
 author: Nadock
 
 
-description: Check pushed commits for unverified commits and send an alert to a message backend.
+description: Check pushed commits for unverified commits.
 
 
 branding:
@@ -14,11 +14,11 @@ branding:
 
 inputs:
   github_token:
+    description: GitHub token needed to get verified commit information from the GitHub API
+    required: True
     default: ${{ github.token }}
 
 
 runs:
   using: docker
   image: Dockerfile
-  env:
-    GITHUB_TOKEN: ${{ inputs.github_token }}

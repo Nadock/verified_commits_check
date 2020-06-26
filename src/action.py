@@ -1,7 +1,7 @@
 """
-Verified Commtis Alert GitHub Action.
+Verified Commtis Check GitHub Action.
 
-When run as a GitHub Action on every push to a repository, it can detect and alert
+When run as a GitHub Action on every push to a repository, it can detect and check
 whenever a user pushes unverified commits to GitHub.
 """
 import json
@@ -12,12 +12,12 @@ from typing import Dict, List
 
 from . import github, messenger
 
-LOGGER = logging.getLogger("verified_commits_alert")
+LOGGER = logging.getLogger("verified_commits_check")
 LOGGER.setLevel(os.environ.get("LOG_LEVEL", "INFO"))
 
 
 def main():
-    """Run the verified commits check and alert on any unverified commits."""
+    """Run the verified commits check and check on any unverified commits."""
     try:
         github_repository = os.environ["GITHUB_REPOSITORY"]
         github_event_path = os.environ["GITHUB_EVENT_PATH"]
