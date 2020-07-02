@@ -31,7 +31,7 @@ def send_to_console(*, author: str, repo: str, commits: List[dict]):
         f"commits to {repo}:\n\n"
     )
 
-    msg += "\n".join([f"\t* {commit['url']}" for commit in commits])
+    msg += "\n".join([f"\t* {commit['html_url']}" for commit in commits])
 
     print(msg)
 

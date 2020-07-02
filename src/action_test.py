@@ -192,12 +192,12 @@ def test_main(github):
             return {
                 "author": {"login": "user1"},
                 "commit": {"verification": {"verified": False}},
-                "url": f"https://github.com/{repo}/commit/{sha}",
+                "html_url": f"https://github.com/{repo}/commit/{sha}",
             }
         return {
             "author": {"login": "user1"},
             "commit": {"verification": {"verified": True}},
-            "url": f"https://github.com/{repo}/commit/{sha}",
+            "html_url": f"https://github.com/{repo}/commit/{sha}",
         }
 
     github.GitHubApiClient.return_value.get_commit = mock_get_commit
