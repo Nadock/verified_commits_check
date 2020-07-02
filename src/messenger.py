@@ -27,10 +27,9 @@ def send_to_console(*, author: str, repo: str, commits: List[dict]):
     `commits` is the list of commits that were unverified.
     """
     msg = (
-        f"GitHub User {author} pushed the following {len(commits)} unverified "
-        f"commits to {repo}:\n\n"
+        f"GitHub user {author.title()} pushed {len(commits)} "
+        f"unverified commits to {repo}:\n\n"
     )
-
     msg += "\n".join([f"\t* {commit['html_url']}" for commit in commits])
 
     print(msg)
