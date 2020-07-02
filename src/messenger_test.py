@@ -7,11 +7,11 @@ def test_send_to_console(capsys):
     # pylint: disable=protected-access
     author = "test-user"
     repo = "github/repo-name"
-    commits = [{"url": "https://url.1"}, {"url": "https://url.2"}]
+    commits = [{"html_url": "https://url.1"}, {"html_url": "https://url.2"}]
 
     expected = (
         f"GitHub User {author} pushed the following {len(commits)} unverified commits "
-        f"to {repo}:\n\n\t* {commits[0]['url']}\n\t* {commits[1]['url']}\n"
+        f"to {repo}:\n\n\t* {commits[0]['html_url']}\n\t* {commits[1]['html_url']}\n"
     )
 
     messenger.send_to_console(author=author, repo=repo, commits=commits)
