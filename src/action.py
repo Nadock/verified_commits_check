@@ -13,7 +13,6 @@ from typing import Dict, List
 from . import github, messenger
 
 LOGGER = logging.getLogger("verified_commits_check")
-LOGGER.setLevel(os.environ.get("LOG_LEVEL", "INFO"))
 
 
 def main():
@@ -62,6 +61,8 @@ def select_backend():
     message_backend = os.environ.get("MESSAGE_BACKEND", "console").lower()
     if message_backend == "console":
         return messenger.send_to_console
+    if message_backend == "slack":
+        return messenger.send_to_slack
 
     raise ValueError(f"Unknown message backend {message_backend}")
 

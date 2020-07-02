@@ -129,7 +129,10 @@ def test_group_by_author_no_author_key(commits):
         action.group_by_author(commits)
 
 
-@pytest.mark.parametrize("env_name, func", [("console", messenger.send_to_console)])
+@pytest.mark.parametrize(
+    "env_name, func",
+    [("console", messenger.send_to_console), ("slack", messenger.send_to_slack)],
+)
 def test_select_backend(env_name, func):
     """
     Test select_backend correctly selects the backend messenger from the

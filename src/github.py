@@ -1,6 +1,5 @@
 """API interactions with GitHub."""
 import logging
-import os
 import json
 from urllib import parse
 from typing import Dict, Optional
@@ -8,7 +7,6 @@ from typing import Dict, Optional
 import requests
 
 LOGGER = logging.getLogger(__name__)
-LOGGER.setLevel(os.environ.get("LOG_LEVEL", "INFO"))
 
 
 class GitHubApiClient:
