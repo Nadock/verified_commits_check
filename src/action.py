@@ -13,7 +13,6 @@ from typing import Dict, List
 from . import github, messenger
 
 LOGGER = logging.getLogger("verified_commits_check")
-LOGGER.setLevel(os.environ.get("LOG_LEVEL", "INFO"))
 
 
 def main():
