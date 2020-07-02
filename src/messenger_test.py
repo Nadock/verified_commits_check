@@ -12,8 +12,8 @@ def test_send_to_console(capsys):
     commits = [{"html_url": "https://url.1"}, {"html_url": "https://url.2"}]
 
     expected = (
-        f"GitHub User {author} pushed the following {len(commits)} unverified commits "
-        f"to {repo}:\n\n\t* {commits[0]['html_url']}\n\t* {commits[1]['html_url']}\n"
+        "GitHub user Test-User pushed 2 unverified commits to github/repo-name:"
+        "\n\n\t* https://url.1\n\t* https://url.2\n"
     )
 
     messenger.send_to_console(author=author, repo=repo, commits=commits)
@@ -40,8 +40,8 @@ def test_send_to_slack(requests):
 
     text = "Test-User pushed 2 unverified commits"
     markdown = (
-        "GitHub user `<https://github.com/test-user|test-user>` pushed *2* unverified "
-        "commits to `<https://github.com/github/repo-name|github/repo-name>`:\n"
+        "GitHub user `<https://github.com/test-user|Test-User>` pushed *2* unverified "
+        "commits to `<https://github.com/github/repo-name|github/repo-name>`\n"
         "\t:heavy_minus_sign: `<https://url.1|sha1>`\n"
         "\t:heavy_minus_sign: `<https://url.2|sha2>`\n"
     )
