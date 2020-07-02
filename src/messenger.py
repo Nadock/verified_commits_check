@@ -45,8 +45,8 @@ def send_to_slack(*, author: str, repo: str, commits: List[dict]):
     Arugments are the same as in `send_to_console`.
     """
     markdown = (
-        f"GitHub user `<https://github.com/{author}|{author}>` pushed *{len(commits)}* "
-        f"unverified commits to `<https://github.com/{repo}|{repo}>`:\n"
+        f"GitHub user `<https://github.com/{author}|{author.title()}>` pushed "
+        f"*{len(commits)}* unverified commits to `<https://github.com/{repo}|{repo}>`\n"
     )
     for commit in commits:
         markdown += f"\t:heavy_minus_sign: `<{commit['html_url']}|{commit['sha']}>`\n"
