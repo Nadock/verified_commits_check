@@ -3,7 +3,7 @@ Format and send a message indicating the git commits listed in hashes are not ve
 
 Each sender method should have the same signature as `send_to_console`.
 """
-
+import os
 from typing import List
 
 
@@ -29,3 +29,12 @@ def send_to_console(*, author: str, repo: str, commits: List[dict]):
     msg += "\n".join([f"\t* {commit['url']}" for commit in commits])
 
     print(msg)
+
+
+def send_to_slack(*, author: str, repo: str, commits: List[dict]):
+    """
+    Send a message to a Slack webhook URL describing the unverified commits.
+
+    Arugments are the same as in `send_to_console`.
+    """
+    pass

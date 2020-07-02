@@ -62,6 +62,8 @@ def select_backend():
     message_backend = os.environ.get("MESSAGE_BACKEND", "console").lower()
     if message_backend == "console":
         return messenger.send_to_console
+    if message_backend == "slack":
+        return messenger.send_to_slack
 
     raise ValueError(f"Unknown message backend {message_backend}")
 
