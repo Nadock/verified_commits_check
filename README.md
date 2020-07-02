@@ -1,6 +1,7 @@
 # Verified Commits Check
 
 <!-- HTML here because we want centre alignment -->
+<!-- markdownlint-disable MD033 -->
 <p align="center">
     <!-- pylint -->
     <a href="https://github.com/nadock/verified_commits_check/actions/?query=workflow%3Apylint">
@@ -23,6 +24,7 @@
         <img alt="black" src="https://img.shields.io/badge/code%20style-black-000000.svg">
     </a>
 </p>
+<!-- markdownlint-enable MD033 -->
 
 A GitHub Action to check commits pushed to a repositiory to ensure they are verified (aka signed).
 
