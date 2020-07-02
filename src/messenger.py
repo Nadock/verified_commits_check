@@ -3,8 +3,13 @@ Format and send a message indicating the git commits listed in hashes are not ve
 
 Each sender method should have the same signature as `send_to_console`.
 """
-
+import logging
+import os
 from typing import List
+
+import requests
+
+LOGGER = logging.getLogger(__name__)
 
 
 def send_to_console(*, author: str, repo: str, commits: List[dict]):
@@ -29,3 +34,38 @@ def send_to_console(*, author: str, repo: str, commits: List[dict]):
     msg += "\n".join([f"\t* {commit['url']}" for commit in commits])
 
     print(msg)
+
+
+def send_to_slack(*, author: str, repo: str, commits: List[dict]):
+    """
+    Send a message to a Slack webhook URL describing the unverified commits.
+
+    Formats both a plaintext and markdown message and sends it to the Slack webhook URL
+    in the environment variable `SLACK_WEBHOOK_URL`.
+
+    Arugments are the same as in `send_to_console`.
+    """
+    markdown = (
+        f"GitHub user `<https://github.com/{author}|{author}>` pushed *{len(commits)}* "
+        f"unverified commits to `<https://github.com/{repo}|{repo}>`:\n"
+    )
+    for commit in commits:
+        markdown += f"\t:heavy_minus_sign: `<{commit['html_url']}|{commit['sha']}>`\n"
+
+    # Simplified plaintext message for notification body and anywhere else that can't
+    # display the entire markdown message
+    plain_text = f"{author.title()} pushed {len(commits)} unverified commits"
+
+    webhook_url = os.environ["SLACK_WEBHOOK_URL"]
+    body = {
+        "text": plain_text,
+        "blocks": [{"type": "section", "text": {"type": "mrkdwn", "text": markdown}}],
+    }
+
+    try:
+        LOGGER.debug(f"POST {webhook_url} {body}")
+        resp = requests.post(webhook_url, json=body)
+        resp.raise_for_status()
+    except Exception:
+        LOGGER.error(f"Unable to publish to Slack webhook: {resp.text}")
+        raise

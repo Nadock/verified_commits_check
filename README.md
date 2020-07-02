@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD033 -->
 # Verified Commits Check
 
 <!-- HTML here because we want centre alignment -->
@@ -45,6 +46,37 @@ jobs:
 ```
 
 You can see this example in action in this repository [here](https://github.com/nadock/verified_commits_check/actions?query=workflow%3A%22An+example+workflow%22).
+
+### Message desitnations
+
+`verified_commits_check` can send the notification messages for unverified commmits to one of a few places. By default, if you do not specify `MESSAGE_BACKEND`, it will be printed to the GitHub Actions build log. If you would prefer to have the messages sent to one of the other supported backend, follow the additional setup instructions for that backned below.
+
+#### Slack webhook
+
+To have `verified_commits_check` send notification messages to a Slack Webhook, follow the steps below.
+
+1. Setup a Slack Webhook to recieve the notification message by following [Slack's guide here](https://slack.com/help/articles/115005265063-Incoming-Webhooks-for-Slack).
+2. Add the Webhook URL setup in the previous step to your repositories secrets by following [GitHub's guide here](https://docs.github.com/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets#creating-encrypted-secrets-for-a-repository).
+3. Update your workflow file tin in include the `MESSAGE_BACKEND` and `SLACK_WEBHOOK_URL` environment variables like the example below.
+
+```yaml
+name: Run verified commits check
+
+on: push
+
+jobs:
+  verified_commit_check:
+    name: Check for unverified commits
+    runs-on: ubuntu-latest
+    env:
+      MESSAGE_BACKEND: slack
+      # Assuming you named the secret from step 2 "slack_webhook_url"
+      SLACK_WEBHOOK_URL: ${{ secrets.slack_webhook_url }}
+    steps:
+      - uses: nadock/verified_commits_check@v1
+```
+
+<sup><b><i>Note: Anyone who has your Slack Webhook URL can send you messages, so store it securly!</i></b></sup>
 
 ## Common questions
 
