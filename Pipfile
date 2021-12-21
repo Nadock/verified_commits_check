@@ -4,7 +4,7 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-black = "==19.10b0"
+black = "==21.12b0"
 mypy = "==0.920"
 pylint = "==2.12.2"
 pytest = "==6.2.5"
@@ -14,4 +14,4 @@ rope = "==0.22.0"
 requests = "==2.26.0"
 
 [requires]
-python_version = "3.8"
+python_version = "3.10"
