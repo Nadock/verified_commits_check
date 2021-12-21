@@ -59,7 +59,7 @@ def test_is_commit_verified(commit, verified):
 def test_is_commit_verified_no_verified_key(commit):
     """
     Test is_commit_verified fails correctly when the verification keys are not present
-    in the GitHub API repsonse object.
+    in the GitHub API response object.
     """
     with pytest.raises(KeyError):
         action.is_commit_verified(commit)
@@ -93,7 +93,7 @@ def test_get_unverified_commits(github):
 
 def test_group_by_author():
     """
-    Test group_by_author groups a list of commit objects from the GitHub API correclty.
+    Test group_by_author groups a list of commit objects from the GitHub API correctly.
     """
     commits = [
         {"id": 1, "author": {"login": "user1"}},
@@ -122,7 +122,7 @@ def test_group_by_author():
 @pytest.mark.parametrize("commits", [[{}], [{"author": {}}]])
 def test_group_by_author_no_author_key(commits):
     """
-    Test group_by_author fails correclty when the author keys are not present in the
+    Test group_by_author fails correctly when the author keys are not present in the
     GitHub API response object.
     """
     with pytest.raises(KeyError):
@@ -145,7 +145,7 @@ def test_select_backend(env_name, func):
 
 def test_select_backend_unknown():
     """
-    Test select_backend fails correclty when the `MESSAGE_BACKEND` env var is invalid.
+    Test select_backend fails correctly when the `MESSAGE_BACKEND` env var is invalid.
     """
     os.environ["MESSAGE_BACKEND"] = "unknown_env_name"
     with pytest.raises(ValueError):

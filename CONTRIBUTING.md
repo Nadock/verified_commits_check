@@ -18,7 +18,7 @@ $> make setup
 def send_to_X(*, author: str, repo: str, commits: List[dict]):
 ```
 
-1. Implement the required logic to send to the new messenger backend in that function. Pull any other required configuration from environment vairables.
+1. Implement the required logic to send to the new messenger backend in that function. Pull any other required configuration from environment variables.
 
 1. Add unit tests covering your new messenger to `src/messenger_test.py`.
 

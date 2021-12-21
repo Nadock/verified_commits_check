@@ -42,7 +42,7 @@ def send_to_slack(*, author: str, repo: str, commits: List[dict]):
     Formats both a plaintext and markdown message and sends it to the Slack webhook URL
     in the environment variable `SLACK_WEBHOOK_URL`.
 
-    Arugments are the same as in `send_to_console`.
+    Arguments are the same as in `send_to_console`.
     """
     markdown = (
         f"GitHub user `<https://github.com/{author}|{author.title()}>` pushed "
