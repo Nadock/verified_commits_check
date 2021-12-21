@@ -5,7 +5,7 @@ from . import messenger
 
 
 def test_send_to_console(capsys):
-    """Test send_to_console formats output correclty."""
+    """Test send_to_console formats output correctly."""
     # pylint: disable=protected-access
     author = "test-user"
     repo = "github/repo-name"
@@ -25,7 +25,7 @@ def test_send_to_console(capsys):
 @mock.patch("src.messenger.requests")
 def test_send_to_slack(requests):
     """
-    Test send_to_slack formats a message and POSTs it to the webhook URL correclty.
+    Test send_to_slack formats a message and POSTs it to the webhook URL correctly.
     """
     author = "test-user"
     repo = "github/repo-name"
@@ -48,7 +48,7 @@ def test_send_to_slack(requests):
 
     expected = {
         "text": text,
-        "blocks": [{"type": "section", "text": {"type": "mrkdwn", "text": markdown,},}],
+        "blocks": [{"type": "section", "text": {"type": "mrkdwn", "text": markdown}}],
     }
 
     requests.post.return_value.raise_for_status.assert_called_once()

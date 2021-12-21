@@ -52,7 +52,7 @@ def test_unwrap_requests_response_body_not_okay():
 )
 def test_github_api_client_headers(extra):
     """
-    Test `GitHubApiClient.headers` method correclty generates default headers and merges
+    Test `GitHubApiClient.headers` method correctly generates default headers and merges
     supplied extra headers.
     """
     client = github.GitHubApiClient("github-test-token")
