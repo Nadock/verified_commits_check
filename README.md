@@ -45,6 +45,9 @@ jobs:
       - uses: nadock/verified_commits_check@v1
 ```
 
+**:warning: Note:** Currently this action only supports `push` event types. Using `pull_request` or any other will cause the
+action to fail.
+
 You can see this example in action in this repository [here](https://github.com/nadock/verified_commits_check/actions?query=workflow%3A%22An+example+workflow%22).
 
 ### Message destinations
