@@ -1,0 +1,26 @@
+version: 2
+
+updates:
+  - directory: /
+    package-ecosystem: pip
+    schedule:
+      day: tuesday
+      interval: weekly
+      time: "07:00"
+      timezone: Australia/Adelaide
+
+  - directory: /
+    package-ecosystem: github-actions
+    schedule:
+      day: tuesday
+      interval: weekly
+      time: "07:00"
+      timezone: Australia/Adelaide
+
+  - directory: /
+    package-ecosystem: docker
+    schedule:
+      day: tuesday
+      interval: weekly
+      time: "07:00"
+      timezone: Australia/Adelaide
