@@ -184,6 +184,7 @@ def test_main(github):
     """Test the action end-to-end to see everything working together correctly."""
     os.environ["GITHUB_REPOSITORY"] = "github/repo-name"
     os.environ["GITHUB_EVENT_PATH"] = "./events/unit_test.json"
+    os.environ["GITHUB_EVENT_NAME"] = "push"
     os.environ["GITHUB_TOKEN"] = "github-test-token"
 
     def mock_get_commit(repo, sha):
@@ -205,3 +206,13 @@ def test_main(github):
     commit_count = action.main()
     assert commit_count == 1
     github.GitHubApiClient.assert_called_once_with("github-test-token")
+
+
+def test_main_event_name_check():
+    """Ensure non-push events exit cleanly."""
+    os.environ["GITHUB_REPOSITORY"] = "github/repo-name"
+    os.environ["GITHUB_EVENT_PATH"] = "./events/unit_test.json"
+    os.environ["GITHUB_EVENT_NAME"] = "pull_request"
+    os.environ["GITHUB_TOKEN"] = "github-test-token"
+
+    assert action.main() == 1
