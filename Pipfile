@@ -5,13 +5,13 @@ verify_ssl = true
 
 [dev-packages]
 black = "==19.10b0"
-rope = "*"
-mypy = "*"
-pylint = "*"
-pytest = "*"
+mypy = "==0.920"
+pylint = "==2.12.2"
+pytest = "==6.2.5"
+rope = "==0.22.0"
 
 [packages]
-requests = "*"
+requests = "==2.26.0"
 
 [requires]
 python_version = "3.8"
