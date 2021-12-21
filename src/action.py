@@ -20,10 +20,17 @@ def main():
     try:
         github_repository = os.environ["GITHUB_REPOSITORY"]
         github_event_path = os.environ["GITHUB_EVENT_PATH"]
+        github_event_name = os.environ["GITHUB_EVENT_NAME"]
         github_token = os.environ["GITHUB_TOKEN"]
     except KeyError as ex:
-        LOGGER.error(f"Invalid environment configuration: {ex}")
+        LOGGER.error(f"Environment variable {ex} must be set")
         raise ex
+
+    if github_event_name != "push":
+        LOGGER.error(
+            f"This action only supports push type events, not {github_event_name}"
+        )
+        return 1
 
     event = load_event(github_event_path)
     LOGGER.debug(f"Loaded event from {github_event_path}")
