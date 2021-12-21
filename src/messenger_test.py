@@ -48,7 +48,7 @@ def test_send_to_slack(requests):
 
     expected = {
         "text": text,
-        "blocks": [{"type": "section", "text": {"type": "mrkdwn", "text": markdown,},}],
+        "blocks": [{"type": "section", "text": {"type": "mrkdwn", "text": markdown}}],
     }
 
     requests.post.return_value.raise_for_status.assert_called_once()

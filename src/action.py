@@ -114,7 +114,7 @@ def get_commits_from_event(event: dict) -> List[str]:
 
 def load_event(path: str) -> dict:
     """Load a GitHub event from a JSON file stored on disk at `path`."""
-    with open(path) as file:
+    with open(path, encoding="utf-8") as file:
         return json.load(file)
 
 
