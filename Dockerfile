@@ -1,16 +1,17 @@
-FROM python:3.8-alpine
+FROM python:3.10-alpine
 
-RUN mkdir /opt/action && pip3 install pipenv
+WORKDIR /opt/action
 
-COPY Pipfile /opt/action
-COPY Pipfile.lock /opt/action
+RUN pip3 install pipenv==2021.11.23
+
+COPY Pipfile .
+COPY Pipfile.lock .
 
 ARG PIPENV_FLAGS
-RUN cd /opt/action && pipenv install --deploy --system ${PIPENV_FLAGS}
+RUN pipenv install --deploy --system ${PIPENV_FLAGS}
 
-COPY ./src /opt/action/src
-COPY entrypoint.sh /opt/action
+COPY ./src ./src
 
 ENV PYTHON_PATH=/opt/action
 
-ENTRYPOINT [ "/opt/action/entrypoint.sh" ]
+CMD [ "python3", "-m", "src.action" ]
