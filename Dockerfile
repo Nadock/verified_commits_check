@@ -11,7 +11,8 @@ ARG PIPENV_FLAGS
 RUN pipenv install --deploy --system ${PIPENV_FLAGS}
 
 COPY ./src ./src
+COPY ./entrypoint.sh .
 
 ENV PYTHON_PATH=/opt/action
 
-CMD [ "python3", "-m", "src.action" ]
+ENTRYPOINT [ "/opt/action/entrypoint.sh" ]
