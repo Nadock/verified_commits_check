@@ -3,25 +3,17 @@
 
 <!-- HTML here because we want centre alignment -->
 <p align="center">
-    <!-- pylint -->
-    <a href="https://github.com/nadock/verified_commits_check/actions/?query=workflow%3Apylint">
-        <img alt="black" src="https://github.com/Nadock/verified_commits_check/workflows/pylint/badge.svg">
+    <a href="https://github.com/Nadock/verified_commits_check/actions/workflows/pr_checks.yml">
+        <img alt="PR Checks" src="https://github.com/Nadock/verified_commits_check/actions/workflows/pr_checks.yml/badge.svg">
     </a>
-    <!-- pytest -->
-    <a href="https://github.com/nadock/verified_commits_check/actions/?query=workflow%3Apytest">
-        <img alt="black" src="https://github.com/Nadock/verified_commits_check/workflows/pytest/badge.svg">
+    <a href="https://github.com/Nadock/verified_commits_check/actions/workflows/example.yml">
+        <img alt="Example Workflow" src="https://github.com/Nadock/verified_commits_check/actions/workflows/example.yml/badge.svg">
     </a>
-    <!-- mypy -->
-    <a href="https://github.com/nadock/verified_commits_check/actions/?query=workflow%3Amypy">
-        <img alt="black" src="https://github.com/Nadock/verified_commits_check/workflows/mypy/badge.svg">
-    </a>
-    <!-- black -->
-    <a href="https://github.com/nadock/verified_commits_check/actions/?query=workflow%3Ablack">
-        <img alt="black" src="https://github.com/Nadock/verified_commits_check/workflows/black/badge.svg">
-    </a>
-    <!-- codestyle:black -->
     <a href="https://github.com/psf/black">
-        <img alt="black" src="https://img.shields.io/badge/code%20style-black-000000.svg">
+        <img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg">
+    </a>
+    <a href="https://github.com/Nadock/verified_commits_check/releases">
+      <img alt="Latest Release" src="https://img.shields.io/github/v/release/nadock/verified_commits_check?sort=semver">
     </a>
 </p>
 
