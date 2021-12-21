@@ -1,0 +1,54 @@
+name: Pull Request Checks
+
+
+on:
+  pull_request:
+    types:
+      - edited
+      - opened
+      - ready_for_review
+      - reopened
+      - reopened
+      - synchronize
+
+
+jobs:
+  pr_checks:
+    name: PR Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.10
+
+      - name: Setup local environment
+        run: make setup
+
+      - name: Run Black
+        run: make black-check
+
+      - name: Run Pylint
+        run: make pylint
+
+      - name: Run Mypy
+        run: make mypy
+
+      - name: Run Pytest
+        run: make pytest
+
+  manage_prs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Label PR
+        uses: actions/labeler@v3
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Pinned to v1.1.1 to avoid action code changing without our consent
+      - name: Assign PR
+        uses: kentaro-m/auto-assign-action@eea5ee2e4421078bf163287c05e72d162781b30c
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
