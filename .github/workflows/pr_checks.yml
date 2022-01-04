@@ -40,18 +40,3 @@ jobs:
 
       - name: Run Pytest
         run: make pytest
-
-  manage_prs:
-    name: Manage PR
-    runs-on: ubuntu-latest
-    steps:
-      - name: Label PR
-        uses: actions/labeler@v3
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-
-      # Pinned to v1.1.1 to avoid action code changing without our consent
-      - name: Assign PR
-        uses: kentaro-m/auto-assign-action@746a3a558fdd0e061f612ec9f8ff1b8a19c1a115
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}

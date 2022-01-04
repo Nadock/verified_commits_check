@@ -1,16 +1,10 @@
 version: 2
 
+
 updates:
   - directory: /
     package-ecosystem: pip
-    schedule:
-      day: tuesday
-      interval: weekly
-      time: "07:00"
-      timezone: Australia/Adelaide
-
-  - directory: /
-    package-ecosystem: github-actions
+    open-pull-requests-limit: 10
     schedule:
       day: tuesday
       interval: weekly
@@ -19,6 +13,16 @@ updates:
 
   - directory: /
     package-ecosystem: docker
+    open-pull-requests-limit: 10
+    schedule:
+      day: tuesday
+      interval: weekly
+      time: "07:00"
+      timezone: Australia/Adelaide
+
+  - directory: /
+    package-ecosystem: github-actions
+    open-pull-requests-limit: 10
     schedule:
       day: tuesday
       interval: weekly
