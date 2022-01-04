@@ -12,6 +12,15 @@ updates:
       timezone: Australia/Adelaide
 
   - directory: /
+    package-ecosystem: docker
+    schedule:
+      day: tuesday
+      interval: weekly
+      open-pull-requests-limit: 10
+      time: "07:00"
+      timezone: Australia/Adelaide
+
+  - directory: /
     package-ecosystem: github-actions
     schedule:
       day: tuesday
