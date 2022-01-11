@@ -12,7 +12,7 @@ rope = "==0.22.0"
 types-requests = "==2.26.3"
 
 [packages]
-requests = "==2.27.0"
+requests = "==2.27.1"
 
 [requires]
 python_version = "3.10"
