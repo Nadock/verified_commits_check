@@ -7,7 +7,7 @@ verify_ssl = true
 black = "==22.1.0"
 mypy = "==0.931"
 pylint = "==2.12.2"
-pytest = "==6.2.5"
+pytest = "==7.0.0"
 rope = "==0.22.0"
 types-requests = "==2.27.8"
 
