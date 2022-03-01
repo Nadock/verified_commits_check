@@ -8,7 +8,7 @@ black = "==22.1.0"
 mypy = "==0.931"
 pylint = "==2.12.2"
 pytest = "==7.0.1"
-rope = "==0.22.0"
+rope = "==0.23.0"
 types-requests = "==2.27.8"
 
 [packages]
