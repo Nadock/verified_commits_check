@@ -5,7 +5,7 @@ verify_ssl = true
 
 [dev-packages]
 black = "==22.1.0"
-mypy = "==0.931"
+mypy = "==0.941"
 pylint = "==2.12.2"
 pytest = "==7.0.1"
 rope = "==0.23.0"
