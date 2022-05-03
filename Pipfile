@@ -9,7 +9,7 @@ mypy = "==0.950"
 pylint = "==2.13.7"
 pytest = "==7.1.2"
 rope = "==1.0.0"
-types-requests = "==2.27.20"
+types-requests = "==2.27.25"
 
 [packages]
 requests = "==2.27.1"
