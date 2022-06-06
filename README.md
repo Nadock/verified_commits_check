@@ -19,6 +19,10 @@
 
 A GitHub Action to check commits pushed to a repository to ensure they are verified (aka signed).
 
+## Archive notice
+
+**I've archived this repo because I no longer intend on maintaining the code, but it should still work fine if you want to use it.**
+
 ## Setup
 
 Copy the text below into a file in your repository called `.github/workflows/verified_commits_check.yml`, then just commit and push it!
